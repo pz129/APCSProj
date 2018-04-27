@@ -1,14 +1,10 @@
 package apcspro.Project;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Collection;
+import java.io.FileWriter;
+import java.net.URL;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.http.Part;
-
+import org.apache.commons.io.FileUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -23,10 +19,21 @@ public class HomeController implements Route{
 	public Object handle(Request request, Response response) throws Exception {
 		JtwigTemplate jtwigTemplate = JtwigTemplate.fileTemplate(new File("src\\main\\java\\resources\\home.html.twig"));
 		JtwigModel model= JtwigModel.newModel();		
-		System.out.println("here");
 		if(request.requestMethod().toLowerCase().equals("post")) {
-			System.out.println("here");
-			String location = "/sounds";          // the directory location where files will be stored
+			String path="src\\main\\java\\downloads";
+			try {
+				String url=request.queryParams("fileurl");
+				System.out.println(url);
+				String[] ar=url.split("/");
+				BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
+				writer.write("asdf");
+				writer.close();
+				FileUtils.copyURLToFile(new URL(url),new File("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
+				System.out.println("finished");
+			}catch(Exception x){
+				x.printStackTrace();
+			}
+			/*String location = "/sounds";          // the directory location where files will be stored
 			long maxFileSize = 100000000;       // the maximum size allowed for uploaded files
 			long maxRequestSize = 100000000;    // the maximum size allowed for multipart/form-data requests
 			int fileSizeThreshold = 2048;       // the size threshold after which files will be written to disk
@@ -68,7 +75,7 @@ public class HomeController implements Route{
 			}catch(IOException e){
 				System.err.println(e.getMessage());
 				model.with("message", "Please input a file.");
-			}
+			}*/
 		}
 		else {
 			model.with("message", "");

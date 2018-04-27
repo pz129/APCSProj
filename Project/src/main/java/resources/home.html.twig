@@ -4,11 +4,11 @@
 	<h1 class="full" style="text-align:center">
 		Submit your file below!
 	</h1>
-	<form style="width:100%;margin:25px 0px;" method="post" enctype="multipart/form-data">
+	<form name="form" style="width:100%;margin:25px 0px;" method="post">
 	<div style="display:flex;flex-direction:row;flex-wrap:wrap;
 				justify-content:center;align-items:center;">
 	<p style="color:rgb(100,25,25);margin-bottom:25px;text-align:center;width:100%">{{ message }}</p>
-	<input id="zip-file" type="file" name="zip-file" > 
+	<input id="zip-file" type="text" name="fileurl" > 
 	<br><br>
 	<input type="submit" class="btn" value="Submit"><div style="width:100%"><p style="text-align:center">Please submit a standard zip file (Use compression file extensions ".tar" and ".zip")</p></div>
 	</div>
