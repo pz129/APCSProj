@@ -22,6 +22,8 @@ public class Site {
 		Spark.get("/", new HomeController(this));
 		Spark.get("/about-us", new AboutUsController());
 		Spark.post("/",new HomeController(this));
+		Spark.get("/viewprogress", new ViewProgressController(this));
+		Spark.post("/getupdate", new GetUpdateAPI(this));
 	}
 
 }
