@@ -1,1 +1,45 @@
-https://www.gale.com/uk/c/world-history-in-context
+{% extends "base.html.twig" %}
+{% block body %}
+<div class="full" style="align:center;">\
+	{% if error==1 %}
+	<h1 style="width:100%;text-align:center">An Error Has Occured, Not A Valid Key</h1>
+	{% else %}
+	<div style="display:flex;flex-direction:row;flex-wrap:wrap;
+				justify-content:center;align-items:center;width:100%">
+		<canvas width="{{ calcWidth }}" height="{{ calcHeight}}" id="mainCanvas"></canvas>
+	</div>
+	<h1 style="width:100%;text-align:center" id="finishString"></h1>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+	<script>
+	 var json;
+	 var nodes;
+	 var edges;
+	 var width={{ calcWidth }};
+	 var height={{ calcHeight }};
+	 var key="{{ key }}";
+	 var canvas= document.getElementById("mainCanvas");
+	 var interval = setInterval(function(){
+	 	console("asdf");
+	 	$.post("/update",
+	 	{
+	 		key : key,
+	 		type: "neuralnet"
+	 	},
+	 	function(data, status){
+	 		if(data==""){
+	 			document.getElementById("finishString").html("An Error Has Occurred");
+	 			clearInterval(interval);
+	 		}
+	 		json=JSON.parse(data);
+	 		nodes=JSON.parse(json["nodes"]);
+	 		edges=JSON.parse(json["edges"]);
+	 		if(json["status"]=="complete"){
+	 			document.getElementById("finishString").html("Status: finished");
+	 			clearInterval(interval);
+	 		}
+	 	});
+	 },1000);
+	</script>
+	{% endif %}
+</div>
+{% endblock body %}
