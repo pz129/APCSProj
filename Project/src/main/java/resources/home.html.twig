@@ -8,11 +8,48 @@
 	<div style="display:flex;flex-direction:row;flex-wrap:wrap;
 				justify-content:center;align-items:center;">
 	<p style="color:rgb(100,25,25);margin-bottom:25px;text-align:center;width:100%">{{ message }}</p>
-	<input id="zip-file" type="text" name="fileurl" > 
-	<br><br>
-	<input type="submit" class="btn" value="Submit"><div style="width:100%"><p style="text-align:center">Please submit a standard zip file (Use compression file extensions ".tar" and ".zip")</p></div>
+	<div class="row">File URL: <input id="zip-file" type="text" name="fileurl" ></div><div class="row"><p style="text-align:center">Please submit a standard zip file (Use compression file extensions ".tar" and ".zip")</p></div>
+	<div class="row">Epochs (input positive integer): <input id="epochs" type="text" name="epochs"></div>
+	<div class="row">Hidden Layer Dimensions (input positive integer for each): </div>
+	<div id="dims" class="row">
+	</div>
+	<div class="row"><div onClick="add()" style="border: 1px solid black; border-radius:2px; padding:5px; margin:5px">Add Layer</div>
+	</div><br><br>
+	<input type="submit" class="btn" value="Submit"><div style="width:100%"></div>
 	</div>
 	</form>
+	<script>
+	var dim=[];
+	function makeDim(){
+		var toFill=document.getElementById("dims");
+		toFill.innerHTML="";
+		for (var d in dim){
+		 	var newDiv=document.createElement('div');
+		 	newDiv.setAttribute("class","row");
+		 	var newInput=document.createElement('input');
+		 	newInput.setAttribute("type","text");
+		 	newInput.setAttribute("value",dim[d]);
+		 	newInput.setAttribute("oninput","setDim("+d+")");
+			newInput.setAttribute("id","dim"+d);
+			newInput.setAttribute("name","dim"+d)
+			newDiv.appendChild(newInput);
+			toFill.appendChild(newDiv);
+		}
+		
+	}
+	function rem(ind){
+		dim.splice(ind,1);
+		makeDim();
+	}
+	function add(){
+		dim.push("1");
+		makeDim();
+	}
+	function setDim(ind){
+		dim[ind]=document.getElementById("dim"+ind).value;
+	}
+	add();
+	</script>
 	
 </div>
 {% endblock body %}

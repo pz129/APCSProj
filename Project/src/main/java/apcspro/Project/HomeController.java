@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.LinkedList;
 
 import org.apache.commons.io.FileUtils;
 import org.jtwig.JtwigModel;
@@ -23,6 +24,16 @@ public class HomeController implements Route{
 			String path="src\\main\\java\\downloads";
 			try {
 				String url=request.queryParams("fileurl");
+				int epochs=Integer.parseInt(request.queryParams("epochs"));
+				int dimCount=0;
+				String tempDim;
+				LinkedList<Integer> dims=new LinkedList<Integer>();
+				while(dimCount<Integer.MAX_VALUE) {
+					tempDim=request.queryParams("dim"+dimCount);
+					if(tempDim==null) break;
+					dims.add(Integer.parseInt(tempDim));
+					dimCount++;
+				}
 				System.out.println(url);
 				String[] ar=url.split("/");
 				BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
@@ -77,9 +88,7 @@ public class HomeController implements Route{
 				model.with("message", "Please input a file.");
 			}*/
 		}
-		else {
-			model.with("message", "");
-		}
+		model.with("message", "An error has occurred, some input is invalid");
 		return jtwigTemplate.render(model);
 	}
 
