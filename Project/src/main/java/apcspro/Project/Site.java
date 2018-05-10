@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import spark.Spark;
 public class Site {
 	public static final transient Logger log=LoggerFactory.getLogger(Site.class);
-	public TreeMap<String, Temp> activeNeuralNetworks;
+	public TreeMap<String, NeuralNetwork> activeNeuralNetworks;
 	public static void main(String[] args) {
 		Site site=new Site();
 		site.initWebsite();
 		log.info("setup complete");
-		site.activeNeuralNetworks=new TreeMap<String, Temp>();
+		site.activeNeuralNetworks=new TreeMap<String, NeuralNetwork>();
 	}
 	protected void initWebsite() {
 		Spark.port(1234);
@@ -29,17 +29,10 @@ public class Site {
 		Spark.post("/getupdate", new UpdateAPI(this));
 		Spark.post("/update", new UpdateAPI(this));
 	}
-	public void tempAdd() {
-		this.activeNeuralNetworks.put(Instant.now().toEpochMilli()+"",new Temp());
+	public void tempAdd(ArrayList<Integer> dims) {
+		this.activeNeuralNetworks.put(Instant.now().toEpochMilli()+"",new NeuralNetwork(dims));
 		for(String s: this.activeNeuralNetworks.keySet())
 			System.out.println(s);
-	}
-	public class Temp{
-		ArrayList<ArrayList<ArrayList<Double>>> weights;
-		ArrayList<ArrayList<Double>> nodes;
-		String status;
-		public Temp() {
-		}
 	}
 
 }

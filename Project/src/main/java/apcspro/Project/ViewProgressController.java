@@ -5,7 +5,6 @@ import java.io.File;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
-import apcspro.Project.Site.Temp;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -23,11 +22,11 @@ public class ViewProgressController  implements Route{
 			model.with("error", 1);
 		}
 		else {
-			Temp curr=site.activeNeuralNetworks.get(key);
+			NeuralNetwork curr=site.activeNeuralNetworks.get(key);
 			model.with("error", 0);
 			model.with("key",key);
-			model.with("calcWidth", curr.nodes.size()*75+25);
-			model.with("calcHeight", curr.nodes.get(0).size()*75+25);
+			model.with("calcWidth", curr.outputs.size()*75+25);
+			model.with("calcHeight", curr.outputs.get(0).size()*75+25);
 		}
 		return jtwigTemplate.render(model);
 	}

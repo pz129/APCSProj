@@ -2,7 +2,6 @@ package apcspro.Project;
 
 import java.util.ArrayList;
 
-import apcspro.Project.Site.Temp;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -17,8 +16,8 @@ public class UpdateAPI implements Route{
 		if(key==null||type==null||site.activeNeuralNetworks.get(key)==null)
 			return "";
 		else if(type.equals("neuralnet")){
-			Temp curr=site.activeNeuralNetworks.get(key);
-			return "{ nodes: \""+nodesToString(curr.nodes)+"\", edges: \""+weightsToString(curr.weights)+"\", status: \""+curr.status+"\"}";
+			NeuralNetwork curr=site.activeNeuralNetworks.get(key);
+			return "{ nodes: \""+nodesToString(curr.outputs)+"\", edges: \""+weightsToString(curr.weights)+"\", status: \""+curr.status+"\"}";
 		}
 		else if(type.equals("accuracy")){
 			return "100%";
