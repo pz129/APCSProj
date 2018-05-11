@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 import spark.Spark;
 public class Site {
 	public static final transient Logger log=LoggerFactory.getLogger(Site.class);
-	public TreeMap<String, NeuralNetwork> activeNeuralNetworks;
+	public TreeMap<String, NNRunner> activeNeuralNetworks;
 	public static void main(String[] args) {
 		Site site=new Site();
 		site.initWebsite();
 		log.info("setup complete");
-		site.activeNeuralNetworks=new TreeMap<String, NeuralNetwork>();
+		site.activeNeuralNetworks=new TreeMap<String, NNRunner>();
 	}
 	protected void initWebsite() {
 		Spark.port(1234);

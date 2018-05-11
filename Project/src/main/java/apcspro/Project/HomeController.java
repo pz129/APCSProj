@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.apache.commons.io.FileUtils;
@@ -27,7 +28,7 @@ public class HomeController implements Route{
 				int epochs=Integer.parseInt(request.queryParams("epochs"));
 				int dimCount=0;
 				String tempDim;
-				LinkedList<Integer> dims=new LinkedList<Integer>();
+				ArrayList<Integer> dims=new ArrayList<Integer>();
 				while(dimCount<Integer.MAX_VALUE) {
 					tempDim=request.queryParams("dim"+dimCount);
 					if(tempDim==null) break;
@@ -35,11 +36,12 @@ public class HomeController implements Route{
 					dimCount++;
 				}
 				System.out.println(url);
-				String[] ar=url.split("/");
-				BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
-				writer.write("asdf");
-				writer.close();
-				FileUtils.copyURLToFile(new URL(url),new File("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
+				
+				//String[] ar=url.split("/");
+				//BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
+				//writer.write("asdf");
+				//writer.close();
+				//FileUtils.copyURLToFile(new URL(url),new File("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
 				System.out.println("finished");
 			}catch(Exception x){
 				x.printStackTrace();

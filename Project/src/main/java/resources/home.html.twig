@@ -1,6 +1,7 @@
 {% extends "base.html.twig" %}
 {% block body %}
 <div class="full" style="align:center;">
+	<p>This site allows you to submit a text dataset to run in a neural network and see the results in real time!</p>
 	<h1 class="full" style="text-align:center">
 		Submit your file below!
 	</h1>
@@ -8,9 +9,13 @@
 	<div style="display:flex;flex-direction:row;flex-wrap:wrap;
 				justify-content:center;align-items:center;">
 	<p style="color:rgb(100,25,25);margin-bottom:25px;text-align:center;width:100%">{{ message }}</p>
-	<div class="row">File URL: <input id="zip-file" type="text" name="fileurl" ></div><div class="row"><p style="text-align:center">Please submit a standard zip file (Use compression file extensions ".tar" and ".zip")</p></div>
+	<!--  <div class="row">File URL: <input id="zip-file" type="text" name="fileurl" ></div>-->
+	<!--  <div class="row"><p style="text-align:center">Please submit a standard zip file (Use compression file extensions ".tar" and ".zip")</p></div>-->
+	<div class="row"><p>Input the xvalues and yvalues below. Seperate each piece of data by a newline</p></div>
+	<div class = "row"><input name="xval" type="text" placeholder="xvalues"><input name="yval"type="text" placeholder="yvalues"></div>
 	<div class="row">Epochs (input positive integer): <input id="epochs" type="text" name="epochs"></div>
 	<div class="row">Hidden Layer Dimensions (input positive integer for each): </div>
+	<div class="row">Note: the first layer must be the length of each input string. If your input is longer, it will truncate it, and if it is shorter, it will add spaces to the end.</div> 
 	<div id="dims" class="row">
 	</div>
 	<div class="row"><div onClick="add()" style="border: 1px solid black; border-radius:2px; padding:5px; margin:5px">Add Layer</div>
