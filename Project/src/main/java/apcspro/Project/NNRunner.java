@@ -2,9 +2,22 @@ package apcspro.Project;
 
 import java.util.ArrayList;
 
-public class NNRunner {	
-	public NNRunner(int num_epochs, double learning_rate, NeuralNetwork net, ArrayList<ArrayList<Double> > x, ArrayList<ArrayList<Double> > y) {
-		
+public class NNRunner implements Runnable{
+	public NeuralNetwork net;
+	public int num_epochs;
+	public double learning_rate;
+	public ArrayList<ArrayList<Double>> x;
+	public ArrayList<ArrayList<Double>> y;
+	public ArrayList<Integer> dims;
+	public NNRunner(int num_epochs, double learning_rate, ArrayList<Integer> dims, ArrayList<ArrayList<Double> > x, ArrayList<ArrayList<Double> > y) {
+		net=new NeuralNetwork(dims);
+		this.num_epochs=num_epochs;
+		this.learning_rate=learning_rate;
+		this.dims=dims;
+		this.x=x;
+		this.y=y;
+	}
+	public void run() {
 		System.out.println("Initializing Neural Network.");
 		
 		double error;

@@ -29,8 +29,8 @@ public class Site {
 		Spark.post("/getupdate", new UpdateAPI(this));
 		Spark.post("/update", new UpdateAPI(this));
 	}
-	public void tempAdd(ArrayList<Integer> dims) {
-		this.activeNeuralNetworks.put(Instant.now().toEpochMilli()+"",new NeuralNetwork(dims));
+	public void tempAdd(NNRunner nr) {
+		this.activeNeuralNetworks.put(Instant.now().toEpochMilli()+"",nr);
 		for(String s: this.activeNeuralNetworks.keySet())
 			System.out.println(s);
 	}

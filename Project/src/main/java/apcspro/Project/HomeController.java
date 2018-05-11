@@ -24,8 +24,11 @@ public class HomeController implements Route{
 		if(request.requestMethod().toLowerCase().equals("post")) {
 			String path="src\\main\\java\\downloads";
 			try {
-				String url=request.queryParams("fileurl");
+				//String url=request.queryParams("fileurl");
 				int epochs=Integer.parseInt(request.queryParams("epochs"));
+				double learnrate=Double.parseDouble(request.queryParams("learnrate"));
+				String x=request.queryParams("xvals");
+				String y=request.queryParams("yvals");
 				int dimCount=0;
 				String tempDim;
 				ArrayList<Integer> dims=new ArrayList<Integer>();
@@ -35,8 +38,10 @@ public class HomeController implements Route{
 					dims.add(Integer.parseInt(tempDim));
 					dimCount++;
 				}
-				System.out.println(url);
-				
+				NNRunner newrunner=new NNRunner(epochs,learnrate,dims,);
+				//System.out.println(url);
+				Thread t=new Thread(newrunner);
+				t.start();
 				//String[] ar=url.split("/");
 				//BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
 				//writer.write("asdf");
@@ -89,8 +94,8 @@ public class HomeController implements Route{
 				System.err.println(e.getMessage());
 				model.with("message", "Please input a file.");
 			}*/
+			model.with("message", "An error has occurred, some input is invalid");
 		}
-		model.with("message", "An error has occurred, some input is invalid");
 		return jtwigTemplate.render(model);
 	}
 
