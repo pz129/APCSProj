@@ -48,10 +48,12 @@ public class Site {
 	/*
 	 * Add new neural network to existing set of active neural networks
 	 */
-	public void tempAdd(NNRunner nr) {
-		this.activeNeuralNetworks.put(Instant.now().toEpochMilli()+"",nr);
+	public long addRunner(NNRunner nr) {
+		long now=Instant.now().getEpochSecond();
+		this.activeNeuralNetworks.put(now+"",nr);
 		for(String s: this.activeNeuralNetworks.keySet())
 			System.out.println(s);
+		return now;
 	}
 
 }

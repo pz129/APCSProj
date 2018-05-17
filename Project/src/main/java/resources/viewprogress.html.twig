@@ -9,7 +9,10 @@
 		<canvas width="{{ calcWidth }}" height="{{ calcHeight}}" id="mainCanvas"></canvas>
 	</div>
 	<h1 style="width:100%;text-align:center" id="finishString"></h1>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 	<script>
 	 var json;
 	 var nodes;
@@ -19,8 +22,8 @@
 	 var key="{{ key }}";
 	 var canvas= document.getElementById("mainCanvas");
 	 var interval = setInterval(function(){
-	 	console("asdf");
-	 	$.post("/update",
+	 	//console("asdf");
+	 	$.post("/getupdate",
 	 	{
 	 		key : key,
 	 		type: "neuralnet"

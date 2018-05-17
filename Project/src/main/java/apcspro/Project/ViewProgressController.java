@@ -34,13 +34,14 @@ public class ViewProgressController  implements Route{
 		}
 		else {
 			NeuralNetwork curr=site.activeNeuralNetworks.get(key).net;
+			System.out.println(curr==null);
 			model.with("error", 0);
 			model.with("key",key);
-			model.with("calcWidth", curr.outputs.size()*75+25);
+			model.with("calcWidth", curr.outputs.size()*60+30);
 			int max=0;
 			for(ArrayList a: curr.outputs)
 				max=Math.max(a.size(), max);
-			model.with("calcHeight", max*75+25);
+			model.with("calcHeight", max*60+30);
 		}
 		return jtwigTemplate.render(model);
 	}

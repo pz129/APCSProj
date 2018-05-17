@@ -27,8 +27,10 @@ public class HomeController implements Route{
 				//String url=request.queryParams("fileurl");
 				int epochs=Integer.parseInt(request.queryParams("epochs"));
 				double learnrate=Double.parseDouble(request.queryParams("learnrate"));
-				String x=request.queryParams("xvals");
-				String y=request.queryParams("yvals");
+				String x=request.queryParams("xval");
+				String y=request.queryParams("yval");
+				System.out.println(x);
+				System.out.println(y);
 				int dimCount=0;
 				String tempDim;
 				ArrayList<Integer> dims=new ArrayList<Integer>();
@@ -38,20 +40,23 @@ public class HomeController implements Route{
 					dims.add(Integer.parseInt(tempDim));
 					dimCount++;
 				}
+				System.out.println(dims.size());
 				ArrayList<ArrayList<Double>> xarr=new ArrayList<ArrayList<Double>>(),
 										yarr=new ArrayList<ArrayList<Double>>();
 				ParseString(x,xarr,dims.get(0));
 				ParseString(y,yarr,dims.get(dims.size()-1));
 				NNRunner newrunner=new NNRunner(epochs,learnrate,dims,xarr,yarr);
 				//System.out.println(url);
-				//Thread t=new Thread(newrunner);
-				//t.start();
+				long now=site.addRunner(newrunner);
+				Thread t=new Thread(newrunner);
+				t.start();
 				//String[] ar=url.split("/");
 				//BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
 				//writer.write("asdf");
 				//writer.close();
 				//FileUtils.copyURLToFile(new URL(url),new File("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
 				System.out.println("finished");
+				response.redirect("/viewprogress?key="+now);
 			}catch(Exception x){
 				x.printStackTrace();
 			}
@@ -109,7 +114,7 @@ public class HomeController implements Route{
 		String[] split=vals.split("\n");
 		for(String s: split) {
 			ArrayList<Double> temp=new ArrayList<Double>();
-			String[] split2=s.split(",");
+			String[] split2=s.split(" ");
 			for(int i=0;i<size;i++) {
 				if(i>=split2.length)
 					temp.add(0.0);
