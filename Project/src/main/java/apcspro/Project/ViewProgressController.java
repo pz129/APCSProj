@@ -12,9 +12,19 @@ import spark.Route;
 
 public class ViewProgressController  implements Route{
 	Site site;
+	/*
+	 * reference back to site
+	 */
 	ViewProgressController (Site site){
 		this.site=site;
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see spark.Route#handle(spark.Request, spark.Response)
+	 * 
+	 * Uses viewprogress.html.twig
+	 * Creates page to view state of neural network
+	 */
 	public Object handle(Request request, Response response) throws Exception {
 		JtwigTemplate jtwigTemplate = JtwigTemplate.fileTemplate(new File("src\\main\\java\\resources\\viewprogress.html.twig"));
 		JtwigModel model= JtwigModel.newModel();

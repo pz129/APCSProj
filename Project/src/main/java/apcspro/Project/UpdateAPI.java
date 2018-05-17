@@ -8,16 +8,26 @@ import spark.Route;
 
 public class UpdateAPI implements Route{
 	Site site;
+	/*
+	 * reference back to site
+	 */
 	UpdateAPI (Site site){
 		this.site=site;
 	}
+	/*
+	 * (non-Javadoc)
+	 * @see spark.Route#handle(spark.Request, spark.Response)
+	 * 
+	 * Uses parameter "key" of request to return the current state of the neural network associated with the key
+	 * State includes node weights, edge weights, status, loss, and accuracy
+	 */
 	public Object handle(Request request, Response response) throws Exception {
 		String key=request.queryParams("key"), type=request.queryParams("type");
 		if(key==null||type==null||site.activeNeuralNetworks.get(key)==null)
 			return "";
 		else if(type.equals("neuralnet")){
 			NeuralNetwork curr=site.activeNeuralNetworks.get(key).net;
-			return "{ nodes: \""+nodesToString(curr.outputs)+"\", edges: \""+weightsToString(curr.weights)+"\", status: \""+"status"+"\"}";
+			return "{ nodes: \""+curr.outputs+"\", edges: \""+curr.weights+"\", status: \""+"status"+"\"}";
 		}
 		else if(type.equals("accuracy")){
 			return "100%";
@@ -27,6 +37,7 @@ public class UpdateAPI implements Route{
 
 		
 	}
+	/*
 	public static String weightsToString(ArrayList<ArrayList<ArrayList<Double>>> weights) {
 		StringBuilder sb=new StringBuilder();
 		sb.append('[');
@@ -72,6 +83,6 @@ public class UpdateAPI implements Route{
 		}
 		sb.append(']');
 		return sb.toString();
-	}
+	}*/
 
 }

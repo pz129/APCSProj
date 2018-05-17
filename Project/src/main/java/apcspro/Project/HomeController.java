@@ -38,10 +38,14 @@ public class HomeController implements Route{
 					dims.add(Integer.parseInt(tempDim));
 					dimCount++;
 				}
-				NNRunner newrunner=new NNRunner(epochs,learnrate,dims,);
+				ArrayList<ArrayList<Double>> xarr=new ArrayList<ArrayList<Double>>(),
+										yarr=new ArrayList<ArrayList<Double>>();
+				ParseString(x,xarr,dims.get(0));
+				ParseString(y,yarr,dims.get(dims.size()-1));
+				NNRunner newrunner=new NNRunner(epochs,learnrate,dims,xarr,yarr);
 				//System.out.println(url);
-				Thread t=new Thread(newrunner);
-				t.start();
+				//Thread t=new Thread(newrunner);
+				//t.start();
 				//String[] ar=url.split("/");
 				//BufferedWriter writer=new BufferedWriter(new FileWriter("C:\\Users\\Pat z\\APCSProj\\Project\\src\\main\\java\\downloads\\"+ar[ar.length-1]));
 				//writer.write("asdf");
@@ -98,5 +102,21 @@ public class HomeController implements Route{
 		}
 		return jtwigTemplate.render(model);
 	}
-
+	/*
+	 * Turn string of input and ouput and parse the values into doubles to store in Arrays
+	 */
+	public static void ParseString(String vals,ArrayList<ArrayList<Double>> toFill, int size) {
+		String[] split=vals.split("\n");
+		for(String s: split) {
+			ArrayList<Double> temp=new ArrayList<Double>();
+			String[] split2=s.split(",");
+			for(int i=0;i<size;i++) {
+				if(i>=split2.length)
+					temp.add(0.0);
+				else
+					temp.add(Double.parseDouble(split2[i]));
+			}
+			toFill.add(temp);
+		}
+	}
 }
