@@ -33,15 +33,36 @@ public class ViewProgressController  implements Route{
 			model.with("error", 1);
 		}
 		else {
-			NeuralNetwork curr=site.activeNeuralNetworks.get(key).net;
+			NNRunner curr=site.activeNeuralNetworks.get(key);
+			NeuralNetwork currNet=curr.net;
 			System.out.println(curr==null);
+			int r=25, space=30;
+			ArrayList<ArrayList<ArrayList<Double>>> positions=new ArrayList<ArrayList<ArrayList<Double>>>();
+			int max=0,calcWidth,calcHeight;
+			calcWidth= currNet.outputs.size()*(2*r+space)-space+20;
+			for(ArrayList a: currNet.outputs)
+				max=Math.max(a.size(), max);
+			calcHeight=max*(2*r+space)-space+20;
+			for(int i=0;i<curr.dims.size();i++) {
+				ArrayList<ArrayList<Double>> layerpos= new ArrayList<ArrayList<Double>>();
+				for(int j=0;j<curr.dims.get(i);j++) {
+					double margin=calcHeight-(curr.dims.get(i)*(2*r+space)-space/2);
+					ArrayList<Double> XAndY=new ArrayList<Double>();
+					XAndY.add(10.0+i*(2*r+space)+r);
+					XAndY.add(margin+j*(2*r+space)+r);
+					layerpos.add(XAndY);
+				}
+				positions.add(layerpos);
+			}
+			
+			model.with("positions",positions);
+			model.with("calcWidth",calcWidth);
+			model.with("calcHeight", calcHeight );
+			model.with("r",r);
+			model.with("space", space);
 			model.with("error", 0);
 			model.with("key",key);
-			model.with("calcWidth", curr.outputs.size()*60+30);
-			int max=0;
-			for(ArrayList a: curr.outputs)
-				max=Math.max(a.size(), max);
-			model.with("calcHeight", max*60+30);
+			model.with("dims",curr.dims);
 		}
 		return jtwigTemplate.render(model);
 	}
