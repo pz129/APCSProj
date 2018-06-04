@@ -21,7 +21,7 @@
 	 var height={{ calcHeight }};
 	 var key="{{ key }}";
 	 var canvas= document.getElementById("mainCanvas");
-	 var canvastx=canvas.getContext();
+	 var ctx=canvas.getContext("2d");
 	 var dims={{ dims }};
 	 var position= {{ positions }};
 	 var r= {{ r }};
@@ -37,16 +37,17 @@
 	 			document.getElementById("finishString").html("An Error Has Occurred");
 	 			clearInterval(interval);
 	 		}
+	 		console.log(data);
 	 		json=JSON.parse(data);
 	 		nodes=JSON.parse(json["nodes"]);
 	 		edges=JSON.parse(json["edges"]);
 	 		for(var i=0;i<dims.length-1;i++){
-				for(var j=0;j<dims[i];j++){
-					for( var j2=0<dims[i+1];j2++){
+				for(var j=0;j<dims[i+1];j++){
+					for( var j2=0;j2<dims[i];j2++){
 						ctx.beginPath();
 						ctx.lineWidth=edges[i][j][j2]*10;
-						ctx.moveTo(position[i][j][0],position[i][j][1]);
-						ctx.lineTo(position[i+1][j2][0],position[i+1][j2][0]);
+						ctx.moveTo(position[i+1][j][0],position[i+1][j][1]);
+						ctx.lineTo(position[i][j2][0],position[i][j2][0]);
 						ctx.stroke();
 					}
 				}
@@ -57,7 +58,8 @@
 					ctx.arc(position[i][j][0]+r,position[i][j][1],r,0,2*Math.PI);
 					ctx.fillStyle="white";
 					ctx.fill();
-					ctx.fillText(nodes[i][j],position[i][j][0]-r/2],position[i][j][1]-5);
+					if(i!=0)
+						ctx.fillText(nodes[i-1][j],position[i][j][0]-r/2,position[i][j][1]-5);
 					ctx.stroke();
 				}
 			}

@@ -1,6 +1,7 @@
 package apcspro.Project;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class NNRunner implements Runnable{
 	public NeuralNetwork net;
@@ -29,6 +30,12 @@ public class NNRunner implements Runnable{
 				net.backProp(y.get(j));
 				net.gradientUpdate(x.get(j), learning_rate);
 				System.out.println("Training sample " + j + " finished with " + error + " mean-squared error.");
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	}

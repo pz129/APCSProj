@@ -27,7 +27,7 @@ public class UpdateAPI implements Route{
 			return "";
 		else if(type.equals("neuralnet")){
 			NeuralNetwork curr=site.activeNeuralNetworks.get(key).net;
-			return "{ nodes: \""+curr.outputs+"\", edges: \""+curr.weights+"\", status: \""+"status"+"\"}";
+			return "{ \"nodes\": \""+curr.outputs+"\", \"edges\": \""+curr.weights+"\", \"status\": \""+"status"+"\"}";
 		}
 		else if(type.equals("accuracy")){
 			return "100%";

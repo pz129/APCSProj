@@ -39,10 +39,10 @@ public class ViewProgressController  implements Route{
 			int r=25, space=30;
 			ArrayList<ArrayList<ArrayList<Double>>> positions=new ArrayList<ArrayList<ArrayList<Double>>>();
 			int max=0,calcWidth,calcHeight;
-			calcWidth= currNet.outputs.size()*(2*r+space)-space+20;
+			calcHeight= currNet.outputs.size()*(2*r+space)-space+20;
 			for(ArrayList a: currNet.outputs)
 				max=Math.max(a.size(), max);
-			calcHeight=max*(2*r+space)-space+20;
+			calcWidth=max*(2*r+space)-space+20;
 			for(int i=0;i<curr.dims.size();i++) {
 				ArrayList<ArrayList<Double>> layerpos= new ArrayList<ArrayList<Double>>();
 				for(int j=0;j<curr.dims.get(i);j++) {
