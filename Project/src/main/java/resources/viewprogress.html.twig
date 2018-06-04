@@ -37,6 +37,7 @@
 	 			document.getElementById("finishString").html("An Error Has Occurred");
 	 			clearInterval(interval);
 	 		}
+	 		ctx.clearRect(0,0,width,height);
 	 		console.log(data);
 	 		json=JSON.parse(data);
 	 		nodes=JSON.parse(json["nodes"]);
@@ -45,21 +46,24 @@
 				for(var j=0;j<dims[i+1];j++){
 					for( var j2=0;j2<dims[i];j2++){
 						ctx.beginPath();
-						ctx.lineWidth=edges[i][j][j2]*10;
+						ctx.lineWidth=edges[i][j][j2]*5;
 						ctx.moveTo(position[i+1][j][0],position[i+1][j][1]);
-						ctx.lineTo(position[i][j2][0],position[i][j2][0]);
+						ctx.lineTo(position[i][j2][0],position[i][j2][1]);
 						ctx.stroke();
 					}
 				}
 	 		}
+	 		ctx.lineWidth=1;
 	 		for(var i=0;i<dims.length;i++){
 				for(var j=0;j<dims[i];j++){
 					ctx.beginPath();
-					ctx.arc(position[i][j][0]+r,position[i][j][1],r,0,2*Math.PI);
 					ctx.fillStyle="white";
+					ctx.arc(position[i][j][0],position[i][j][1],r,0,2*Math.PI);
 					ctx.fill();
+					ctx.fillStyle="black";
 					if(i!=0)
-						ctx.fillText(nodes[i-1][j],position[i][j][0]-r/2,position[i][j][1]-5);
+						ctx.fillText(Math.floor(nodes[i-1][j]*1000000)/1000000,position[i][j][0]-r*3/4,position[i][j][1]);
+					
 					ctx.stroke();
 				}
 			}
