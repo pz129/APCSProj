@@ -38,7 +38,6 @@
 	 			clearInterval(interval);
 	 		}
 	 		ctx.clearRect(0,0,width,height);
-	 		console.log(data);
 	 		json=JSON.parse(data);
 	 		nodes=JSON.parse(json["nodes"]);
 	 		edges=JSON.parse(json["edges"]);
@@ -67,12 +66,15 @@
 					ctx.stroke();
 				}
 			}
-	 		if(json["status"]=="complete"){
-	 			document.getElementById("finishString").html("Status: finished");
+	 		if(json["status"]=="true"){
+	 			document.getElementById("finishString").innerHTML="Status: finished <br> Error: "+json["error"];
 	 			clearInterval(interval);
 	 		}
+	 		else{
+	 			document.getElementById("finishString").innerHTML= "Status: training <br> Error: "+json["error"];
+			}
 	 	});
-	 },1000);
+	 },250);
 	</script>
 	{% endif %}
 </div>

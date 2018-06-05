@@ -70,7 +70,6 @@ public class NeuralNetwork {
 		for(int i = 0; i<weights.size(); i++) {
 			for(int j = 0; j<weights.get(i).size(); j++) {
 				for(int k = 0; k<weights.get(i).get(j).size()-1; k++) {
-					System.out.println(i+" "+j+" "+k+" "+inputs.size());
 					double update = learning_rate * gradients.get(i).get(j) * inputs.get(k);
 					
 					weights.get(i).get(j).set(k, weights.get(i).get(j).get(k) + update);

@@ -2,14 +2,21 @@ package apcspro.Project;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
+/*
+ * Overarching wrapper for a neural network
+ * It creates a neural network, trains it, as well as sends information to the front end to parse into a neural network on an HTML canvas
+ */
 public class NNRunner implements Runnable{
+	// data for neural network that is querable by the frontend to show
 	public NeuralNetwork net;
 	public int num_epochs;
 	public double learning_rate;
 	public ArrayList<ArrayList<Double>> x;
 	public ArrayList<ArrayList<Double>> y;
 	public ArrayList<Integer> dims;
+	public boolean done=false;
+	public double error;
+	//basic constructor
 	public NNRunner(int num_epochs, double learning_rate, ArrayList<Integer> dims, ArrayList<ArrayList<Double> > x, ArrayList<ArrayList<Double> > y) {
 		net=new NeuralNetwork(dims);
 		this.num_epochs=num_epochs;
@@ -18,10 +25,10 @@ public class NNRunner implements Runnable{
 		this.x=x;
 		this.y=y;
 	}
+	//training function for the neural network
 	public void run() {
 		System.out.println("Initializing Neural Network.");
 		
-		double error;
 		for(int i = 0; i<num_epochs; i++) {
 			System.out.println("Beginning epoch " + i);
 			for(int j = 0; j<x.size(); j++) {
@@ -31,12 +38,13 @@ public class NNRunner implements Runnable{
 				net.gradientUpdate(x.get(j), learning_rate);
 				System.out.println("Training sample " + j + " finished with " + error + " mean-squared error.");
 				try {
-					TimeUnit.SECONDS.sleep(1);
+					TimeUnit.MILLISECONDS.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				
 			}
 		}
+		done=true;
 	}
 }
