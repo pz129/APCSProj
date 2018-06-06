@@ -1,3 +1,9 @@
+/**
+ * Controller to initiate page that views a running neural network
+ * 
+ * @author Patrick Zhang
+ */
+
 package apcspro.Project;
 
 import java.io.File;
@@ -35,7 +41,6 @@ public class ViewProgressController  implements Route{
 		else {
 			//finds neural network from a key
 			NNRunner curr=site.activeNeuralNetworks.get(key);
-			NeuralNetwork currNet=curr.net;
 			int r=25, vspace=30,hspace=70; // radius =25 px, vertical space between node= 30 px, vertical space between nodes = 70px
 			ArrayList<ArrayList<ArrayList<Double>>> positions=new ArrayList<ArrayList<ArrayList<Double>>>(); // positions of nodes on canvas
 			int max=0,calcWidth,calcHeight;

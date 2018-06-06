@@ -1,17 +1,18 @@
+/**
+ * Main class of the website
+ * 
+ * Uses Java Spark library to set up http connections view get and post mehtods
+ * 
+ * @author Patrick Zhang
+ */
 package apcspro.Project;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import spark.Spark;
-/*
- * Main class of Website
- * 
- * Uses Java Spark library to set up http connections view get and post mehtods
- */
 public class Site {
 	public static final transient Logger log=LoggerFactory.getLogger(Site.class);
 	public TreeMap<String, NNRunner> activeNeuralNetworks;

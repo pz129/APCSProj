@@ -1,7 +1,10 @@
 package apcspro.Project;
 
-import java.util.ArrayList;
-
+/**
+ * Controller for AJAX calls by website in order to update the live neuralnetwork feed
+ * 
+ * @author Patrick Zhang
+ */
 import spark.Request;
 import spark.Response;
 import spark.Route;

@@ -1,3 +1,8 @@
+/**
+ * Create about us page
+ * 
+ * @author Patrick Zhang
+ */
 package apcspro.Project;
 
 import java.io.File;

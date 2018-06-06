@@ -1,12 +1,12 @@
+/**
+ * Controller to intiate home page where users submit their data for a neural network
+ * 
+ * @author Patrick Zhang
+ */
 package apcspro.Project;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import org.apache.commons.io.FileUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
@@ -23,7 +23,6 @@ public class HomeController implements Route{
 		JtwigModel model= JtwigModel.newModel();
 		// on submission of test data to make a new neural network
 		if(request.requestMethod().toLowerCase().equals("post")) {
-			String path="src\\main\\java\\downloads";
 			try {
 				//parse information from POST request
 				int epochs=Integer.parseInt(request.queryParams("epochs"));

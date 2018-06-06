@@ -1,11 +1,14 @@
+/**
+ * Overarching wrapper for a neural network
+ * It creates a neural network, trains it, as well as sends information to the front end to parse into a neural network on an HTML canvas
+ * 
+ * @author Patrick Zhang
+ */
+
 package apcspro.Project;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-/*
- * Overarching wrapper for a neural network
- * It creates a neural network, trains it, as well as sends information to the front end to parse into a neural network on an HTML canvas
- */
 public class NNRunner implements Runnable{
 	// data for neural network that is querable by the frontend to show
 	public NeuralNetwork net;
