@@ -31,7 +31,9 @@ public class NNRunner implements Runnable{
 	//training function for the neural network
 	public void run() {
 		System.out.println("Initializing Neural Network.");
-		
+		for(int i = 0; i<x.size(); i++) {
+			x.get(i).add(1.0);
+		}
 		for(int i = 0; i<num_epochs; i++) {
 			System.out.println("Beginning epoch " + i);
 			for(int j = 0; j<x.size(); j++) {
@@ -41,11 +43,10 @@ public class NNRunner implements Runnable{
 				net.gradientUpdate(x.get(j), learning_rate);
 				System.out.println("Training sample " + j + " finished with " + error + " mean-squared error.");
 				try {
-					TimeUnit.MILLISECONDS.sleep(250);
+					TimeUnit.MILLISECONDS.sleep(1);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
 			}
 		}
 		done=true;

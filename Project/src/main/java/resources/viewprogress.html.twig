@@ -45,7 +45,7 @@
 				for(var j=0;j<dims[i+1];j++){
 					for( var j2=0;j2<dims[i];j2++){
 						ctx.beginPath();
-						ctx.lineWidth=edges[i][j][j2]*5;
+						ctx.lineWidth=Math.abs(edges[i][j][j2])*5;
 						ctx.moveTo(position[i+1][j][0],position[i+1][j][1]);
 						ctx.lineTo(position[i][j2][0],position[i][j2][1]);
 						ctx.stroke();
@@ -74,7 +74,7 @@
 	 			document.getElementById("finishString").innerHTML= "Status: training <br> Error: "+json["error"];
 			}
 	 	});
-	 },250);
+	 },4);
 	</script>
 	{% endif %}
 </div>

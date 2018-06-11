@@ -72,7 +72,6 @@ public class MatrixOps {
 			double total = 0;
 			for(int j = 0; j<inputs.size(); j++) {
 				total += inputs.get(j) * weights.get(i).get(j);
-				System.out.println("Cucked"); 
 			}
 			ret.add(total);
 		}
